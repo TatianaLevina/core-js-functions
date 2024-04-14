@@ -121,7 +121,7 @@ function getPolynom(...args) {
  */
 function memoize(func) {
   const cache = new Map();
-  const funcName = func.name ? func.name + ' (memoized)' : 'memoized';
+  const funcName = func.name ? `${func.name} (memoized)` : 'memoized';
   return {
     [funcName](...args) {
       if (!cache.has(args[0])) {
@@ -238,8 +238,10 @@ function partialUsingArguments(fn, ...args1) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-  return function () {
-    return startFrom++;
+  let id = startFrom - 1;
+  return function func() {
+    id += 1;
+    return id;
   };
 }
 
